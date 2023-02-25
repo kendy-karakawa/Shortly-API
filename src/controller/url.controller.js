@@ -34,3 +34,21 @@ export async function getUrlById(req, res){
     }
 
 }
+
+export async function redirectUrl(req, res){
+    const {shortUrl} = req.params 
+
+    try {
+        const findShortUrl = await db.query(`SELECT * FROM shorten WHERE short_url = $1;`, [shortUrl])
+        if (findShortUrl.rowCount === 0) return res.status(404).send("url não existe")
+
+        const urlOriginal = findShortUrl.rows[0].url
+        const count = findShortUrl.rows[0].visit_count + 1
+        await db.query(`UPDATE shorten SET visit_count = $1 WHERE short_url = $2;`, [count, shortUrl])
+        
+        res.redirect(urlOriginal)
+
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
