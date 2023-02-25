@@ -28,7 +28,7 @@ CREATE TABLE public.auth (
     id integer NOT NULL,
     token text NOT NULL,
     user_id integer NOT NULL,
-    createdat date DEFAULT now() NOT NULL
+    "createdAt" date DEFAULT now() NOT NULL
 );
 
 
@@ -62,7 +62,7 @@ CREATE TABLE public.shorten (
     url text NOT NULL,
     short_url text NOT NULL,
     visit_count integer DEFAULT 0 NOT NULL,
-    createdat date DEFAULT now() NOT NULL
+    "createdAt" date DEFAULT now() NOT NULL
 );
 
 
@@ -95,7 +95,7 @@ CREATE TABLE public.users (
     name character varying(100) NOT NULL,
     email text NOT NULL,
     password text NOT NULL,
-    createdat date DEFAULT now() NOT NULL
+    "createdAt" date DEFAULT now() NOT NULL
 );
 
 
@@ -144,21 +144,21 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: auth; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.auth VALUES (1, '6087bd31-7a00-44e0-abff-14c1352589cd', 1, '2023-02-25');
+INSERT INTO public.auth VALUES (1, '4ab96ca6-b95d-46de-a46d-fe34f4e6b5ed', 1, '2023-02-25');
 
 
 --
 -- Data for Name: shorten; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.shorten VALUES (1, 1, 'https://github.com/kendy-karakawa/Shortly-API', 'I4WGiD0O', 0, '2023-02-25');
+INSERT INTO public.shorten VALUES (1, 1, 'https://github.com/kendy-karakawa/Shortly-API', 'p5Pz38UX', 0, '2023-02-25');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'Joao', 'joao@driven.com.br', '$2b$10$a.twQ.Gl2f/G4oW1994cp.o7Gg3zkzp.9rp16mAHge8ZSDhDcColO', '2023-02-25');
+INSERT INTO public.users VALUES (1, 'Joao', 'joao@driven.com.br', '$2b$10$PJ1ypN.Id6R8o0t3.B1pHOX7nSU/hYLq..iHoD.VVeG4rrRjgi.Qq', '2023-02-25');
 
 
 --
