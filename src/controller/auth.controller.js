@@ -46,3 +46,34 @@ export async function signIn (req, res){
         res.status(500).send(error.message)
     }
 }
+
+export async function userInfo (req, res){
+    const id = res.locals.sessao.user_id
+
+    try {
+        const userResult = await db.query(`
+        SELECT json_build_object(
+            'id', u.id,
+            'name', u.name,
+            'visitCount', COALESCE(SUM(s.visit_count), 0),
+            'shortenedUrls', json_agg(
+                json_build_object(
+                    'id', s.id,
+                    'shortUrl', s.short_url,
+                    'url', s.url,
+                    'visitCount', s.visit_count
+                )
+            )
+        )
+        FROM users u 
+        LEFT JOIN shorten s ON u.id = s.user_id
+        WHERE u.id = $1
+        GROUP BY u.id, u.name;`, [id])
+
+        res.status(200).send(userResult.rows[0])
+        
+    } catch (error) {
+        res.status(500).send(error.message)
+
+    }
+}
