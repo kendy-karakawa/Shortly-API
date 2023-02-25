@@ -70,7 +70,7 @@ export async function userInfo (req, res){
         WHERE u.id = $1
         GROUP BY u.id, u.name;`, [id])
 
-        res.status(200).send(userResult.rows[0])
+        res.status(200).send(userResult.rows[0].json_build_object)
         
     } catch (error) {
         res.status(500).send(error.message)
