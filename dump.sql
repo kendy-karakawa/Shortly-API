@@ -27,7 +27,8 @@ SET default_table_access_method = heap;
 CREATE TABLE public.auth (
     id integer NOT NULL,
     token text NOT NULL,
-    user_id integer NOT NULL
+    user_id integer NOT NULL,
+    createdat date DEFAULT now() NOT NULL
 );
 
 
@@ -60,7 +61,8 @@ CREATE TABLE public.shorten (
     user_id integer NOT NULL,
     url text NOT NULL,
     short_url text NOT NULL,
-    visit_count integer DEFAULT 0 NOT NULL
+    visit_count integer DEFAULT 0 NOT NULL,
+    createdat date DEFAULT now() NOT NULL
 );
 
 
@@ -92,7 +94,8 @@ CREATE TABLE public.users (
     id integer NOT NULL,
     name character varying(100) NOT NULL,
     email text NOT NULL,
-    password text NOT NULL
+    password text NOT NULL,
+    createdat date DEFAULT now() NOT NULL
 );
 
 
@@ -141,40 +144,35 @@ ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_
 -- Data for Name: auth; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.auth VALUES (1, '6efd14ed-4387-4703-86ca-487a282a9ca2', 1);
-INSERT INTO public.auth VALUES (2, 'bddc5e50-97ce-48ad-9a1e-98b664654327', 1);
-INSERT INTO public.auth VALUES (3, '9e0591f3-3876-40b4-8568-f576581bfbf5', 1);
-INSERT INTO public.auth VALUES (4, '2ae65e33-20d8-46ae-84d5-855706d34616', 1);
+INSERT INTO public.auth VALUES (1, '6087bd31-7a00-44e0-abff-14c1352589cd', 1, '2023-02-25');
 
 
 --
 -- Data for Name: shorten; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.shorten VALUES (1, 1, 'https://github.com/kendy-karakawa/Shortly-API', '0BTG8J2Y', 0);
-INSERT INTO public.shorten VALUES (2, 1, 'https://github.com/kendy-karakawa/Shortly-API', '02cNhUFR', 0);
-INSERT INTO public.shorten VALUES (3, 1, 'https://github.com/kendy-karakawa/Shortly-API', 'lpperYvG', 0);
+INSERT INTO public.shorten VALUES (1, 1, 'https://github.com/kendy-karakawa/Shortly-API', 'I4WGiD0O', 0, '2023-02-25');
 
 
 --
 -- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.users VALUES (1, 'Joao', 'joao@driven.com.br', '$2b$10$0lp0.gV/oqO0dqBsqJy2ieND4kSHvUFADxpmSy316N9kle3gwSSEW');
+INSERT INTO public.users VALUES (1, 'Joao', 'joao@driven.com.br', '$2b$10$a.twQ.Gl2f/G4oW1994cp.o7Gg3zkzp.9rp16mAHge8ZSDhDcColO', '2023-02-25');
 
 
 --
 -- Name: auth_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.auth_id_seq', 4, true);
+SELECT pg_catalog.setval('public.auth_id_seq', 1, true);
 
 
 --
 -- Name: shorten_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.shorten_id_seq', 3, true);
+SELECT pg_catalog.setval('public.shorten_id_seq', 1, true);
 
 
 --
