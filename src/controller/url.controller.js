@@ -52,3 +52,22 @@ export async function redirectUrl(req, res){
         res.status(500).send(error.message)
     }
 }
+
+export async function deleteShortenUrl(req, res){
+    const { id } = req.params
+    const userId = res.locals.sessao.user_id
+
+    try {
+        const findShortUrl = await db.query(`SELECT * FROM shorten WHERE id = $1;`, [id])
+        if (findShortUrl.rowCount === 0) return res.status(404).send("url não existe")
+
+        if(findShortUrl.rows[0].user_id !== userId) return res.status(401).send("esta url nao te pertence")
+
+        await db.query(`DELETE FROM shorten WHERE id = $1;`, [id])
+
+        res.sendStatus(204)
+        
+    } catch (error) {
+        res.status(500).send(error.message)
+    }
+}
