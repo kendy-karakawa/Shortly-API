@@ -8,7 +8,7 @@ export async function ranking(req, res){
         FROM users u 
         JOIN shorten s ON u.id = s.user_id
         GROUP BY u.id
-        ORDER BY visitCount DESC
+        ORDER BY "visitCount" DESC
         LIMIT 10;
         `)
 
