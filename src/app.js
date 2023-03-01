@@ -10,5 +10,5 @@ app.use(express.json());
 
 app.use([authRouter, urlRouter,rankRouter]);
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, ()=> console.log(`Server is running in Port: ${port}!!`));
